@@ -1,0 +1,16 @@
+# Webstorm
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# NPM
+.sass-cache/
+node_modules
+npm-debug.log*
+
+#Golang
+assets/debug.go
+build/florence

@@ -1,0 +1,23 @@
+.border--left-thick {
+    border-left: 16px solid #E5E6E7;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.highlight-block {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    padding: 16px;
+    background-color: #E5E6E7;
+    margin: 32px 16px 0 0;
+    border: 1px solid rgba(208,210,211, 1);
+}
+
+.highlight-block p {
+    padding: 0;
+    text-align: right;
+    white-space: pre-line;
+}
