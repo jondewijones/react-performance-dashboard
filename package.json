@@ -4,7 +4,7 @@
   "description": "ONS performance dashboard written in React",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack-dev-server && node ./node_modules/webpack/bin/webpack.js -d --watch",
+    "watch": "node ./node_modules/webpack/bin/webpack.js -d --watch",
     "build": "node ./node_modules/webpack/bin/webpack.js -d"
   },
   "repository": {
