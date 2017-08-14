@@ -15,7 +15,11 @@ class Traffic extends Component {
         super(props);
 
         this.state = {
-            hasData: false
+            hasData: false,
+            error: {
+                hasError: false,
+                message: ""
+            }
         };
     }
 
@@ -27,18 +31,21 @@ class Traffic extends Component {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Network response was not ok.');
+                v
             }).then(json => {
                 this.props.dispatch(receivedTrafficData(buildTrafficPageData(json)));
-            }).catch(function (err) {
-                // Error :(
+            }).catch(() => {
+                this.setState({error: {
+                    hasError: true,
+                    message: "Unable to retrieve data."
+                }});
             });
         }
 
         this.props.dispatch(updateActiveTab("traffic"));
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps() {
         this.setState({hasData: true});
     }
 
@@ -62,6 +69,9 @@ class Traffic extends Component {
                         }
                     })
                     : ""
+                }
+                {this.state.error.hasError ?
+                    <p>{this.state.error.message}</p> : ""
                 }
             </div>
         )

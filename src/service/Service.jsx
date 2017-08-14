@@ -14,7 +14,11 @@ class Service extends Component {
         super(props);
 
         this.state = {
-            hasData: false
+            hasData: false,
+            error: {
+                hasError: false,
+                message: ""
+            }
         };
     }
 
@@ -26,18 +30,21 @@ class Service extends Component {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Network response was not ok.');
+                throw new Error(`Network response was not ok - ${response.status}`);
             }).then(json => {
                 this.props.dispatch(receivedServiceData(buildServicePageData(json)));
-            }).catch(function (err) {
-                // Error :(
+            }).catch(() => {
+                this.setState({error: {
+                    hasError: true,
+                    message: "Unable to retrieve data."
+                }});
             });
         }
 
         this.props.dispatch(updateActiveTab("service"));
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps() {
         this.setState({hasData: true});
     }
 
@@ -58,6 +65,9 @@ class Service extends Component {
                         }
                     })
                     : ""
+                }
+                {this.state.error.hasError ?
+                    <p>{this.state.error.message}</p> : ""
                 }
             </div>
         )
